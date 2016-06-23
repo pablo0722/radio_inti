@@ -18,13 +18,12 @@ Command:
   build/default/debug/newmainXC16.o \
   build/default/debug/filtro.o \
   build/default/debug/adcDrv1.o \
-  build/default/debug/piloto_19k.o \
   /opt/microchip/xc16/v1.26/lib/libdsp-elf.a \
-  -T/tmp/tmp00002d03.00 \
-  -T/tmp/tmp00002d03.01 \
-  -T/tmp/tmp00002d03.02 \
-  -T/tmp/tmp00002d03.03 \
-  -T/tmp/tmp00002d03.04 \
+  -T/tmp/tmp00003ee1.00 \
+  -T/tmp/tmp00003ee1.01 \
+  -T/tmp/tmp00003ee1.02 \
+  -T/tmp/tmp00003ee1.03 \
+  -T/tmp/tmp00003ee1.04 \
   --defsym=__MPLAB_BUILD=1 \
   --defsym=__MPLAB_DEBUG=1 \
   --defsym=__DEBUG=1 \
@@ -53,8 +52,10 @@ Command:
 
 Archive member included because of file (symbol)
 
+/opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vcopy.obj)
+                              build/default/debug/newmainXC16.o (_VectorCopy)
 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(iirtrans.obj)
-                              build/default/debug/newmainXC16.o (_IIRTransposed)
+                              build/default/debug/adcDrv1.o (_IIRTransposed)
 
 Optional library libp33FJ128MC802.a not found
 /opt/microchip/xc16/v1.26/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o)
@@ -90,14 +91,13 @@ Program Memory  [Origin = 0x200, Length = 0x15600]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x128           0x1bc  (444)
-.const                       0x328               0x47c           0x6ba  (1722)
-.text                        0x7a4                0x86            0xc9  (201)
-.dinit                       0x82a                0x64            0x96  (150)
-.text                        0x88e                0x5e            0x8d  (141)
-.shared.dinit                0x8ec                 0x2             0x3  (3)
+.text                        0x200               0x134           0x1ce  (462)
+.const                       0x334               0x47c           0x6ba  (1722)
+.text                        0x7b0                0xf8           0x174  (372)
+.dinit                       0x8a8                0x64            0x96  (150)
+.shared.dinit                0x90c                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0xa65  (2661) 2%
+                 Total program memory used (bytes):          0xa95  (2709) 2%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -127,8 +127,8 @@ reserve_data_0x826           0x826                0x2a            0x2a  (42)
 .bss                         0x884                   0           0x200  (512)
 .yconst                      0xa84                   0            0x14  (20)
 .data                        0xa98                   0             0xc  (12)
-_0xf6b13a6c576bd11a         0x4400                   0           0x200  (512)
-_0xf6b13a10576bd11a         0x4600                   0           0x200  (512)
+_0xf6b37a6c576c005b         0x4400                   0           0x200  (512)
+_0xf6b37a10576c005b         0x4600                   0           0x200  (512)
 
                  Total data memory used (bytes):          0x6a4  (1700) 10%
 
@@ -166,22 +166,24 @@ External Symbols in Program Memory (by address):
                   0x00023c                  __data_init
                   0x00023c                  __data_init_standard
                   0x0002a8                  __DefaultInterrupt
-                  0x0002ac                  _IIRTransposed
-                  0x000318                  _IIRTransposedInit
-                  0x0007a4                  _initAdc1
-                  0x0007aa                  _initTmr3
-                  0x0007bc                  _initDma0
-                  0x0007ec                  __DMA0Interrupt
-                  0x00088e                  _main
+                  0x0002ac                  _VectorCopy
+                  0x0002b8                  _IIRTransposed
+                  0x000324                  _IIRTransposedInit
+                  0x0007b0                  _initAdc1
+                  0x0007b6                  _initTmr3
+                  0x0007c8                  _initDma0
+                  0x0007f8                  __DMA0Interrupt
+                  0x000836                  _main
                   0xf80000                  __FBS.sec
                   0xf80002                  __FSS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0002ac                  _IIRTransposed
-                  0x000318                  _IIRTransposedInit
-                  0x0007ec                  __DMA0Interrupt
+                  0x0002b8                  _IIRTransposed
+                  0x000324                  _IIRTransposedInit
+                  0x0002ac                  _VectorCopy
+                  0x0007f8                  __DMA0Interrupt
                   0x0002a8                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
@@ -190,10 +192,10 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __data_init_standard
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0007a4                  _initAdc1
-                  0x0007bc                  _initDma0
-                  0x0007aa                  _initTmr3
-                  0x00088e                  _main
+                  0x0007b0                  _initAdc1
+                  0x0007c8                  _initDma0
+                  0x0007b6                  _initTmr3
+                  0x000836                  _main
 
 Memory Configuration
 
@@ -223,7 +225,6 @@ Linker script and memory map
 LOAD build/default/debug/newmainXC16.o
 LOAD build/default/debug/filtro.o
 LOAD build/default/debug/adcDrv1.o
-LOAD build/default/debug/piloto_19k.o
 LOAD /opt/microchip/xc16/v1.26/lib/libdsp-elf.a
 
 reserve_data_0x800
@@ -284,7 +285,7 @@ LOAD /opt/microchip/xc16/v1.26/bin/bin/../../lib/libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x128
+.text             0x000200        0x134
  *(.init)
  .init            0x000200         0x3c /opt/microchip/xc16/v1.26/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __reset
@@ -301,9 +302,11 @@ LOAD /opt/microchip/xc16/v1.26/bin/bin/../../lib/libfx-elf.a
  *(.libc)
  *(.libm)
  *(.libdsp)
- .libdsp          0x0002ac         0x7c /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(iirtrans.obj)
-                  0x0002ac                  _IIRTransposed
-                  0x000318                  _IIRTransposedInit
+ .libdsp          0x0002ac          0xc /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vcopy.obj)
+                  0x0002ac                  _VectorCopy
+ .libdsp          0x0002b8         0x7c /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(iirtrans.obj)
+                  0x0002b8                  _IIRTransposed
+                  0x000324                  _IIRTransposedInit
  *(.lib*)
 
 usercode
@@ -354,24 +357,22 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x101c
+.debug_info       0x000000       0x100e
  *(.debug_info)
- .debug_info      0x000000        0x6f3 build/default/debug/newmainXC16.o
- .debug_info      0x0006f3        0x929 build/default/debug/adcDrv1.o
+ .debug_info      0x000000        0x6e5 build/default/debug/newmainXC16.o
+ .debug_info      0x0006e5        0x929 build/default/debug/adcDrv1.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x25a
+.debug_abbrev     0x000000        0x259
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x113 build/default/debug/newmainXC16.o
  .debug_abbrev    0x000113        0x146 build/default/debug/adcDrv1.o
- .debug_abbrev    0x000259          0x1 build/default/debug/piloto_19k.o
 
-.debug_line       0x000000        0x1fd
+.debug_line       0x000000        0x1e0
  *(.debug_line)
- .debug_line      0x000000         0xdd build/default/debug/newmainXC16.o
- .debug_line      0x0000dd         0x1a build/default/debug/filtro.o
- .debug_line      0x0000f7         0xec build/default/debug/adcDrv1.o
- .debug_line      0x0001e3         0x1a build/default/debug/piloto_19k.o
+ .debug_line      0x000000         0xda build/default/debug/newmainXC16.o
+ .debug_line      0x0000da         0x1a build/default/debug/filtro.o
+ .debug_line      0x0000f4         0xec build/default/debug/adcDrv1.o
 
 .debug_frame      0x000000         0xd8
  *(.debug_frame)
@@ -1513,7 +1514,7 @@ __c30_signature
  __c30_signature
                   0x00017f          0x6 build/default/debug/adcDrv1.o
  __c30_signature
-                  0x000185          0x6 build/default/debug/piloto_19k.o
+                  0x000185          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vcopy.obj)
  __c30_signature
                   0x00018b          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(iirtrans.obj)
  __c30_signature
@@ -1521,15 +1522,15 @@ __c30_signature
  __c30_signature
                   0x000197          0x6 /opt/microchip/xc16/v1.26/bin/bin/../../lib/liblega-pic30-elf.a(data_init_standard.o)
 
-_0xf6b13a10576bd11a
+_0xf6b37a10576c005b
                     0x4600        0x200
- _0xf6b13a10576bd11a
+ _0xf6b37a10576c005b
                     0x4600        0x200 build/default/debug/adcDrv1.o
                     0x4600                  _BufferA
 
-_0xf6b13a6c576bd11a
+_0xf6b37a6c576c005b
                     0x4400        0x200
- _0xf6b13a6c576bd11a
+ _0xf6b37a6c576c005b
                     0x4400        0x200 build/default/debug/adcDrv1.o
                     0x4400                  _BufferB
 
@@ -1574,22 +1575,20 @@ _0xf6b13a6c576bd11a
  .ivt._DMA0Interrupt
                   0x00001c          0x2 build/default/debug/adcDrv1.o
 
-.const              0x8328        0x47c load address 0x000328  
- .const             0x8328        0x47c build/default/debug/newmainXC16.o
+.const              0x8334        0x47c load address 0x000334  
+ .const             0x8334        0x47c build/default/debug/newmainXC16.o
 
-.text             0x0007a4         0x86
- .text            0x0007a4         0x86 build/default/debug/adcDrv1.o
-                  0x0007a4                  _initAdc1
-                  0x0007aa                  _initTmr3
-                  0x0007bc                  _initDma0
-                  0x0007ec                  __DMA0Interrupt
+.text             0x0007b0         0xf8
+ .text            0x0007b0         0x86 build/default/debug/adcDrv1.o
+                  0x0007b0                  _initAdc1
+                  0x0007b6                  _initTmr3
+                  0x0007c8                  _initDma0
+                  0x0007f8                  __DMA0Interrupt
+ .text            0x000836         0x72 build/default/debug/newmainXC16.o
+                  0x000836                  _main
 
-.dinit            0x00082a         0x64
- .dinit           0x00082a         0x64 data_init
+.dinit            0x0008a8         0x64
+ .dinit           0x0008a8         0x64 data_init
 
-.text             0x00088e         0x5e
- .text            0x00088e         0x5e build/default/debug/newmainXC16.o
-                  0x00088e                  _main
-
-.shared.dinit     0x0008ec          0x2
- .shared.dinit    0x0008ec          0x2 shared_data_init
+.shared.dinit     0x00090c          0x2
+ .shared.dinit    0x00090c          0x2 shared_data_init
