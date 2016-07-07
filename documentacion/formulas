@@ -1,0 +1,38 @@
+********************************************************************
+* hoja de datos de la libreria
+********************************************************************
+Cycles (including C-function call and return overheads):
+35 + N(11 + 11S), or
+38 + N( 9 + 17S) if coefficients in P memory.
+S is number of second order sections.
+
+
+Source samples, x[n], defined in 0 ≤ n < N.
+Destination samples, y[n], defined in 0 ≤ n < N.
+********************************************************************
+EN NUESTRO CASO: N = 192
+		S = 4
+		clk = 40 MHz
+
+
+35+192*(11+11*4) = 10595 ciclos
+tiempo de ejecucion = 264.875 us
+
+38+192*(9+17*4) = 14822 ciclos
+tiempo de ejecucion = 370.55 us
+
+********************************************************************
+VectorAdd: N=191
+
+tiempo de ejecucion = 25.6u
+
+********************************************************************
+VectorMultiply: N=191
+
+tiempo de ejecucion = 20.4u
+
+********************************************************************
+VectorCopy: N=191
+
+tiempo de ejecucion = 5.6u
+********************************************************************
