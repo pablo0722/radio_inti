@@ -112,7 +112,7 @@ _ExampleHPFFilter:
 ;    File   Notch.s
 ; ..............................................................................
 
-                .equ NotchNumTaps, 19
+                .equ NotchNumTaps, 31
 
 ; ..............................................................................
 ; Allocate and initialize filter taps
@@ -126,8 +126,6 @@ _ExampleHPFFilter:
 NotchTaps:
 ;; COEFICIENTES FILTRO FIR DE AGUSTIN O.    
 ;.hword  0x4CCD, 0x8342, 0x4CCD
-    
-/*
 ; 30 COEFICIENTES FILTRO FIR ELIMINA BANDA 
 .hword	0xee75,0x14a5,0x0796,0xff9e,0xfb77
 .hword	0xfa4c,0xfb6b,0xfe07,0x0135,0x03d1
@@ -136,15 +134,7 @@ NotchTaps:
 .hword	0x04f2,0x03d1,0x0135,0xfe07,0xfb6b
 .hword	0xfa4c,0xfb77,0xff9e,0x0796,0x14a5
 .hword	0xee75
-*/
-    
 ;.hword	0x0002
-    
-; 19 coeficientes - miercoles 3 de agosto    
-.hword 0x1b8b,0xf275,0xe753,0xea89,0x0255
-.hword 0x1e53,0x24a3,0x0b97,0xe61b,0x1463
-.hword 0xe61b,0x0b97,0x24a3,0x1e53,0x0255
-.hword 0xea89,0xe753,0xf275,0x1b8b
 
 ; ..............................................................................
 ; Allocate delay line in (uninitialized) Y data space
@@ -207,4 +197,3 @@ _NotchFilter:
 ;               mov     #output, W2     ; Initalize W2 to output buffer
 ;               mov     #20, W3 ; Initialize W3 with number of required output samples
 ;               call    _BlockFIRFilter ; call as many times as needed
-
