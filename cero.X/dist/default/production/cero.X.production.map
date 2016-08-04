@@ -18,6 +18,7 @@ Command:
   build/default/production/newmainXC16.o \
   build/default/production/filtro.o \
   build/default/production/adcDrv1.o \
+  build/default/production/MPX.o \
   /opt/microchip/xc16/v1.26/lib/libdsp-elf.a \
   --defsym=__MPLAB_BUILD=1 \
   -Tp33FJ128MC802.gld.00 \
@@ -42,8 +43,14 @@ Command:
   --library=lega-c-elf \
   -end-group \
 
-Se incluyó el miembro del archivo debido al fichero (símbolo)
+Archive member included because of file (symbol)
 
+/opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vscl.obj)
+                              build/default/production/MPX.o (_VectorScale)
+/opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vadd.obj)
+                              build/default/production/MPX.o (_VectorAdd)
+/opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vmul.obj)
+                              build/default/production/MPX.o (_VectorMultiply)
 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(firdelay.obj)
                               build/default/production/newmainXC16.o (_FIRDelayInit)
 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(fir.obj)
@@ -85,13 +92,13 @@ Program Memory  [Origin = 0x200, Length = 0x15600]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x1b2           0x28b  (651)
-.const                       0x3b2               0x47c           0x6ba  (1722)
-.dinit                       0x82e               0x24a           0x36f  (879)
-.text                        0xa78               0x100           0x180  (384)
-.shared.dinit                0xb78                 0x2             0x3  (3)
+.text                        0x200               0x208           0x30c  (780)
+.const                       0x408               0x180           0x240  (576)
+.dinit                       0x588               0x44e           0x675  (1653)
+.text                        0x9d6               0x1c8           0x2ac  (684)
+.shared.dinit                0xb9e                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0xe37  (3639) 2%
+                 Total program memory used (bytes):          0xe70  (3696) 2%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -113,14 +120,15 @@ section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .xdata                       0x800                   0           0x200  (512)
 .nbss                        0xa00                   0             0x2  (2)
-.bss                         0xa02                   0           0x200  (512)
+.data                        0xa02                   0           0x2fc  (764)
+.bss                         0xcfe                   0           0x200  (512)
 .ydata                      0x4200                   0           0x100  (256)
 .data                       0x4300                   0            0x1a  (26)
 .yconst                     0x431a                   0             0x4  (4)
-_0xf6af8a6c5790f4c5         0x4400                   0           0x200  (512)
-_0xf6af8a105790f4c5         0x4600                   0           0x200  (512)
+_0xf6b30a6c57a35624         0x4400                   0           0x200  (512)
+_0xf6b30a1057a35624         0x4600                   0           0x200  (512)
 
-                 Total data memory used (bytes):          0x920  (2336) 14%
+                 Total data memory used (bytes):          0xc1c  (3100) 18%
 
 
 Dynamic Memory Usage
@@ -128,15 +136,17 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xc02                              0x35fe  (13822)
+stack                        0xefe                              0x3302  (13058)
 
-                 Maximum dynamic memory (bytes):         0x35fe  (13822)
+                 Maximum dynamic memory (bytes):         0x3302  (13058)
 
 
 External Symbols in Data Memory (by address):
 
                     0x0a00                  _DmaBuffer
-                    0x0a02                  _outputSignal
+                    0x0a02                  _piloto_pablo
+                    0x0b80                  _subportadora
+                    0x0cfe                  _outputSignal
                     0x4300                  _ExampleHPFFilter
                     0x430c                  _NotchFilter
                     0x4400                  _BufferB
@@ -149,7 +159,9 @@ External Symbols in Data Memory (by name):
                     0x0a00                  _DmaBuffer
                     0x4300                  _ExampleHPFFilter
                     0x430c                  _NotchFilter
-                    0x0a02                  _outputSignal
+                    0x0cfe                  _outputSignal
+                    0x0a02                  _piloto_pablo
+                    0x0b80                  _subportadora
 
 External Symbols in Program Memory (by address):
 
@@ -158,26 +170,36 @@ External Symbols in Program Memory (by address):
                   0x00023c                  __data_init
                   0x00023c                  __data_init_standard
                   0x0002a8                  __DefaultInterrupt
-                  0x0002ac                  _FIRDelayInit
-                  0x0002ba                  _FIR
-                  0x000336                  _IIRTransposed
-                  0x0003a2                  _IIRTransposedInit
-                  0x000a78                  _initAdc1
-                  0x000a7e                  _initTmr3
-                  0x000a90                  _initDma0
-                  0x000ac0                  __DMA0Interrupt
-                  0x000afe                  _main
+                  0x0002ac                  _VectorScale
+                  0x0002c8                  _VectorAdd
+                  0x0002e6                  _VectorMultiply
+                  0x000302                  _FIRDelayInit
+                  0x000310                  _FIR
+                  0x00038c                  _IIRTransposed
+                  0x0003f8                  _IIRTransposedInit
+                  0x0009d6                  _ArmadoMPX
+                  0x000a98                  _initAdc1
+                  0x000a9e                  _initTmr3
+                  0x000ab0                  _initDma0
+                  0x000ae0                  __DMA0Interrupt
+                  0x000b1e                  _main
+                  0x000b78                  _Init_DSP
                   0xf80000                  __FBS.sec
                   0xf80002                  __FSS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0002ba                  _FIR
-                  0x0002ac                  _FIRDelayInit
-                  0x000336                  _IIRTransposed
-                  0x0003a2                  _IIRTransposedInit
-                  0x000ac0                  __DMA0Interrupt
+                  0x0009d6                  _ArmadoMPX
+                  0x000310                  _FIR
+                  0x000302                  _FIRDelayInit
+                  0x00038c                  _IIRTransposed
+                  0x0003f8                  _IIRTransposedInit
+                  0x000b78                  _Init_DSP
+                  0x0002c8                  _VectorAdd
+                  0x0002e6                  _VectorMultiply
+                  0x0002ac                  _VectorScale
+                  0x000ae0                  __DMA0Interrupt
                   0x0002a8                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
@@ -186,14 +208,14 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __data_init_standard
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000a78                  _initAdc1
-                  0x000a90                  _initDma0
-                  0x000a7e                  _initTmr3
-                  0x000afe                  _main
+                  0x000a98                  _initAdc1
+                  0x000ab0                  _initDma0
+                  0x000a9e                  _initTmr3
+                  0x000b1e                  _main
 
-Configuración de la Memoria
+Memory Configuration
 
-Nombre           Origen             Longitud           Atributos
+Name             Origin             Length             Attributes
 data             0x000800           0x004000           a !xr
 reset            0x000000           0x000004  
 ivt              0x000004           0x0000fc  
@@ -214,11 +236,12 @@ FUID2            0xf80014           0x000002
 FUID3            0xf80016           0x000002  
 *default*        0x000000           0xffffffff  
 
-Guión del enlazador y mapa de memoria
+Linker script and memory map
 
 LOAD build/default/production/newmainXC16.o
 LOAD build/default/production/filtro.o
 LOAD build/default/production/adcDrv1.o
+LOAD build/default/production/MPX.o
 LOAD /opt/microchip/xc16/v1.26/lib/libdsp-elf.a
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD p33FJ128MC802
@@ -251,7 +274,7 @@ LOAD /opt/microchip/xc16/v1.26/bin/bin/../../lib/libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x1b2
+.text             0x000200        0x208
  *(.init)
  .init            0x000200         0x3c /opt/microchip/xc16/v1.26/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __reset
@@ -268,13 +291,19 @@ LOAD /opt/microchip/xc16/v1.26/bin/bin/../../lib/libfx-elf.a
  *(.libc)
  *(.libm)
  *(.libdsp)
- .libdsp          0x0002ac          0xe /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(firdelay.obj)
-                  0x0002ac                  _FIRDelayInit
- .libdsp          0x0002ba         0x7c /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(fir.obj)
-                  0x0002ba                  _FIR
- .libdsp          0x000336         0x7c /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(iirtrans.obj)
-                  0x000336                  _IIRTransposed
-                  0x0003a2                  _IIRTransposedInit
+ .libdsp          0x0002ac         0x1c /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vscl.obj)
+                  0x0002ac                  _VectorScale
+ .libdsp          0x0002c8         0x1e /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vadd.obj)
+                  0x0002c8                  _VectorAdd
+ .libdsp          0x0002e6         0x1c /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vmul.obj)
+                  0x0002e6                  _VectorMultiply
+ .libdsp          0x000302          0xe /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(firdelay.obj)
+                  0x000302                  _FIRDelayInit
+ .libdsp          0x000310         0x7c /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(fir.obj)
+                  0x000310                  _FIR
+ .libdsp          0x00038c         0x7c /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(iirtrans.obj)
+                  0x00038c                  _IIRTransposed
+                  0x0003f8                  _IIRTransposedInit
  *(.lib*)
 
 usercode
@@ -325,32 +354,37 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1103
+.debug_info       0x000000       0x126a
  *(.debug_info)
- .debug_info      0x000000        0x7be build/default/production/newmainXC16.o
- .debug_info      0x0007be        0x945 build/default/production/adcDrv1.o
+ .debug_info      0x000000        0x6fe build/default/production/newmainXC16.o
+ .debug_info      0x0006fe        0x934 build/default/production/adcDrv1.o
+ .debug_info      0x001032        0x238 build/default/production/MPX.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x268
+.debug_abbrev     0x000000        0x30c
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x122 build/default/production/newmainXC16.o
- .debug_abbrev    0x000122        0x146 build/default/production/adcDrv1.o
+ .debug_abbrev    0x000000        0x139 build/default/production/newmainXC16.o
+ .debug_abbrev    0x000139        0x146 build/default/production/adcDrv1.o
+ .debug_abbrev    0x00027f         0x8d build/default/production/MPX.o
 
-.debug_line       0x000000        0x1e4
+.debug_line       0x000000        0x280
  *(.debug_line)
- .debug_line      0x000000         0xde build/default/production/newmainXC16.o
- .debug_line      0x0000de         0x1a build/default/production/filtro.o
- .debug_line      0x0000f8         0xec build/default/production/adcDrv1.o
+ .debug_line      0x000000         0xf4 build/default/production/newmainXC16.o
+ .debug_line      0x0000f4         0x1a build/default/production/filtro.o
+ .debug_line      0x00010e         0xec build/default/production/adcDrv1.o
+ .debug_line      0x0001fa         0x86 build/default/production/MPX.o
 
-.debug_frame      0x000000         0xd8
+.debug_frame      0x000000        0x12a
  *(.debug_frame)
- .debug_frame     0x000000         0x30 build/default/production/newmainXC16.o
- .debug_frame     0x000030         0xa8 build/default/production/adcDrv1.o
+ .debug_frame     0x000000         0x4c build/default/production/newmainXC16.o
+ .debug_frame     0x00004c         0xa8 build/default/production/adcDrv1.o
+ .debug_frame     0x0000f4         0x36 build/default/production/MPX.o
 
-.debug_str        0x000000         0xa9
+.debug_str        0x000000         0x9c
  *(.debug_str)
- .debug_str       0x000000         0x50 build/default/production/newmainXC16.o
- .debug_str       0x000050         0x59 build/default/production/adcDrv1.o
+ .debug_str       0x000000         0x29 build/default/production/newmainXC16.o
+ .debug_str       0x000029         0x59 build/default/production/adcDrv1.o
+ .debug_str       0x000082         0x1a build/default/production/MPX.o
 
 .debug_loc
  *(.debug_loc)
@@ -359,22 +393,26 @@ __FUID3
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0x9e
+                  0x000000         0xed
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x1b build/default/production/newmainXC16.o
+                  0x000000         0x4a build/default/production/newmainXC16.o
  .debug_pubnames
-                  0x00001b         0x83 build/default/production/adcDrv1.o
+                  0x00004a         0x83 build/default/production/adcDrv1.o
+ .debug_pubnames
+                  0x0000cd         0x20 build/default/production/MPX.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x30
+.debug_aranges    0x000000         0x48
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/newmainXC16.o
  .debug_aranges
                   0x000018         0x18 build/default/production/adcDrv1.o
+ .debug_aranges
+                  0x000030         0x18 build/default/production/MPX.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1469,38 +1507,48 @@ LOAD data_init
 LOAD shared_data_init
 
 .debug_pubtypes
-                  0x000030        0x157
+                  0x000048        0x160
  .debug_pubtypes
-                  0x000030         0xa2 build/default/production/newmainXC16.o
+                  0x000048         0x8a build/default/production/newmainXC16.o
  .debug_pubtypes
                   0x0000d2         0xb5 build/default/production/adcDrv1.o
+ .debug_pubtypes
+                  0x000187         0x21 build/default/production/MPX.o
 
 __c30_signature
-                  0x000187         0x2a
+                  0x0001a8         0x42
  __c30_signature
-                  0x000187          0x6 build/default/production/newmainXC16.o
+                  0x0001a8          0x6 build/default/production/newmainXC16.o
  __c30_signature
-                  0x00018d          0x6 build/default/production/adcDrv1.o
+                  0x0001ae          0x6 build/default/production/adcDrv1.o
  __c30_signature
-                  0x000193          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(firdelay.obj)
+                  0x0001b4          0x6 build/default/production/MPX.o
  __c30_signature
-                  0x000199          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(fir.obj)
+                  0x0001ba          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vscl.obj)
  __c30_signature
-                  0x00019f          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(iirtrans.obj)
+                  0x0001c0          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vadd.obj)
  __c30_signature
-                  0x0001a5          0x6 /opt/microchip/xc16/v1.26/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o)
+                  0x0001c6          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(vmul.obj)
  __c30_signature
-                  0x0001ab          0x6 /opt/microchip/xc16/v1.26/bin/bin/../../lib/liblega-pic30-elf.a(data_init_standard.o)
+                  0x0001cc          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(firdelay.obj)
+ __c30_signature
+                  0x0001d2          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(fir.obj)
+ __c30_signature
+                  0x0001d8          0x6 /opt/microchip/xc16/v1.26/lib/libdsp-elf.a(iirtrans.obj)
+ __c30_signature
+                  0x0001de          0x6 /opt/microchip/xc16/v1.26/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o)
+ __c30_signature
+                  0x0001e4          0x6 /opt/microchip/xc16/v1.26/bin/bin/../../lib/liblega-pic30-elf.a(data_init_standard.o)
 
-_0xf6af8a105790f4c5
+_0xf6b30a1057a35624
                     0x4600        0x200
- _0xf6af8a105790f4c5
+ _0xf6b30a1057a35624
                     0x4600        0x200 build/default/production/adcDrv1.o
                     0x4600                  _BufferA
 
-_0xf6af8a6c5790f4c5
+_0xf6b30a6c57a35624
                     0x4400        0x200
- _0xf6af8a6c5790f4c5
+ _0xf6b30a6c57a35624
                     0x4400        0x200 build/default/production/adcDrv1.o
                     0x4400                  _BufferB
 
@@ -1514,9 +1562,14 @@ _0xf6af8a6c5790f4c5
  .nbss              0x0a00          0x2 build/default/production/adcDrv1.o
                     0x0a00                  _DmaBuffer
 
-.bss                0x0a02        0x200
- .bss               0x0a02        0x200 build/default/production/adcDrv1.o
-                    0x0a02                  _outputSignal
+.data               0x0a02        0x2fc
+ .data              0x0a02        0x2fc build/default/production/newmainXC16.o
+                    0x0a02                  _piloto_pablo
+                    0x0b80                  _subportadora
+
+.bss                0x0cfe        0x200
+ .bss               0x0cfe        0x200 build/default/production/adcDrv1.o
+                    0x0cfe                  _outputSignal
 
 .data               0x4300         0x1a
  .data              0x4300         0x1a build/default/production/filtro.o
@@ -1549,20 +1602,23 @@ _0xf6af8a6c5790f4c5
  .ivt._DMA0Interrupt
                   0x00001c          0x2 build/default/production/adcDrv1.o
 
-.const              0x83b2        0x47c dirección de carga 0x0003b2  
- .const             0x83b2        0x47c build/default/production/newmainXC16.o
+.const              0x8408        0x180 load address 0x000408  
+ .const             0x8408        0x180 build/default/production/newmainXC16.o
 
-.dinit            0x00082e        0x24a
- .dinit           0x00082e        0x24a data_init
+.dinit            0x000588        0x44e
+ .dinit           0x000588        0x44e data_init
 
-.text             0x000a78        0x100
- .text            0x000a78         0x86 build/default/production/adcDrv1.o
-                  0x000a78                  _initAdc1
-                  0x000a7e                  _initTmr3
-                  0x000a90                  _initDma0
-                  0x000ac0                  __DMA0Interrupt
- .text            0x000afe         0x7a build/default/production/newmainXC16.o
-                  0x000afe                  _main
+.text             0x0009d6        0x1c8
+ .text            0x0009d6         0xc2 build/default/production/MPX.o
+                  0x0009d6                  _ArmadoMPX
+ .text            0x000a98         0x86 build/default/production/adcDrv1.o
+                  0x000a98                  _initAdc1
+                  0x000a9e                  _initTmr3
+                  0x000ab0                  _initDma0
+                  0x000ae0                  __DMA0Interrupt
+ .text            0x000b1e         0x80 build/default/production/newmainXC16.o
+                  0x000b1e                  _main
+                  0x000b78                  _Init_DSP
 
-.shared.dinit     0x000b78          0x2
- .shared.dinit    0x000b78          0x2 shared_data_init
+.shared.dinit     0x000b9e          0x2
+ .shared.dinit    0x000b9e          0x2 shared_data_init

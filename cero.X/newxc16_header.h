@@ -18,7 +18,7 @@
 
 // 'C' source line config statements
 
-#include <xc.h>
+//#include <xc.h>
 
 // FBS
 #pragma config BWRP = WRPROTECT_OFF     // Boot Segment Write Protect (Boot Segment may be written)
